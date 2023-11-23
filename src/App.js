@@ -1,10 +1,14 @@
-
+import {Provider} from "react-redux"
 import React from 'react'
 import Body from "./components/Body"
+import { applyActionCode } from "firebase/auth"
+import appStore from "./utils/appStore"
 
 const App = () => {
   return (
-    <Body/>
+    <Provider store ={appStore}>
+      <Body/>
+    </Provider>
   )
 }
 
