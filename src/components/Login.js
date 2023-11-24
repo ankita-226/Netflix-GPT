@@ -3,15 +3,16 @@ import Header from "./Header"
 import {useRef, useState} from "react"
 import {createUserWithEmailAndPassword } from "firebase/auth";
 import {signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+
 import {auth} from "../utils/firebase"
 import {updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { AVATAR_URL, BG_URL } from "../utils/constant";
 const Login = () =>{
     const [isSignInForm, setIsSignInForm] = useState(true)
     const [errorMessage, setErrorMessage] = useState()
-    const navigate = useNavigate();
+    
     const dispatch = useDispatch()
     const email = useRef(null)
     const password = useRef(null)
@@ -33,7 +34,7 @@ createUserWithEmailAndPassword(auth, email.current.value, password.current.value
     const user = userCredential.user;
     updateProfile(user, {
       displayName: name.current.value,
-       photoURL: "https://avatars.githubusercontent.com/u/127372728?v=4"
+       photoURL: AVATAR_URL
     }).then(() => {
       
       const {uid, email, displayName,photoURL}= auth.currentUser
@@ -45,7 +46,7 @@ createUserWithEmailAndPassword(auth, email.current.value, password.current.value
       setErrorMessage(error.message)
     });
     
-    navigate("/browse")
+    
     // ...
   })
   .catch((error) => {
@@ -64,7 +65,7 @@ signInWithEmailAndPassword(auth, email.current.value, password.current.value)
     // Signed in 
     const user = userCredential.user;
     // ...
-    navigate("/browse")
+  
     console.log(user)
   })
   .catch((error) => {
@@ -80,7 +81,7 @@ signInWithEmailAndPassword(auth, email.current.value, password.current.value)
         <div>
             <Header/>
             <div className="absolute w-full h-[100vh]">
-                <img src="https://assets.nflxext.com/ffe/siteui/vlv3/a09bb938-2d90-42ae-986e-5a3e4abf9e77/8eb1e781-3494-4aa4-9405-268ca6473e4c/IN-en-20231113-popsignuptwoweeks-perspective_alpha_website_large.jpg"/>
+                <img src={BG_URL}/>
             </div>
             <form  onSubmit = {(e)=>e.preventDefault()} className="absolute bg-black w-3/12 p-12 my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80">
                 <h1 className="font-bold text-3xl py-4">{isSignInForm?"Sign In":"Sign Up"}</h1>
