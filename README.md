@@ -39,7 +39,16 @@ tailwind classes to make it main container to look awesome
 - useUpComing Custom Hook
 - GPT Search Feature 
 - Multi-language Feature in our App(*)
-
+- Open AI api key
+- Gpt search API call
+- memoization
+- fetched gpt movies suggestions from tmdb 
+- created gpt slice added data
+- resused movieList component to make movie suggesrion container
+- memoization
+- adding .env file 
+- adding .env file to gitignore
+- made our site responsive
 
 
 
